@@ -1,29 +1,8 @@
-# Planejamento de Viagem
+# React + Vite
 
-# Descrição
-Um sistema desenvolvido para planejar ida e volta da viagem, local hospedado, rota de viagem e outras informações importantes a serem pautadas quando se fala de uma viagem.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# Índice
-- [Ferramentas utilizadas](#ferramentas-utilizadas)
-- [Instalação](#instalação)
-- [Utilização](#utilização)
-- [Contato](#contato)
+Currently, two official plugins are available:
 
-# Ferramentas utilizadas
-(Utilizadas até o momento)
-- Framework React.js
-- HTML, JS e CSS
-
-# Instalação
-#### Clone o repositório
-git clone https://github.com/BezerraLuiz/planejamento-viagem.git
-#### Navegue até o repositório
-cd planejamento-viagem
-#### Instale as dependências
-npm install
-
-# Utilização
-Dentro da pasta do repositório, utilize o comando **npm run dev** para executar o projeto.
-
-# Contato
-Meu contato disponível no meu perfil do Github e aqui: luizantoniopcb@gmail.com.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
