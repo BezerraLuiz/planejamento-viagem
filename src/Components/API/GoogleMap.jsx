@@ -1,5 +1,5 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 const containerStyle = {
   width: '400px',
@@ -27,7 +27,7 @@ export default function Places() {
     setMap(map);
   }, [center]);
 
-  const onUnmount = useCallback((map) => {
+  const onUnmount = useCallback(() => {
     setMap(null);
   }, []);
 
@@ -46,20 +46,20 @@ export default function Places() {
           map.panTo({ lat, lng });
         }
       } else {
-        console.error('Geocode was not successful for the following reason:', data.status);
+        console.error('Geocode sem sucesso pelo seguinte erro: ', data.status);
       }
     } catch (error) {
-      console.error('Error fetching geocode:', error);
+      console.error('Erro na busca geocode: ', error);
     }
   };
 
   return (
     <>
       <input
-        type="text"
+        type="number"
         value={location}
         onChange={handleLocationChange}
-        placeholder="Enter ZIP code or location"
+        placeholder="Insira o CEP."
       />
       <button onClick={handleSearch}>Search</button>
       {isLoaded ? (
