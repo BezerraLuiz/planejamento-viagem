@@ -63,7 +63,7 @@ export default function Places() {
   return (
     <>
       <input
-        type="number"
+        type="text"
         value={location}
         onChange={handleLocationChange}
         placeholder="Insira o local da viagem."
