@@ -1,10 +1,10 @@
 import "./App.css";
-// import Places from "./Components/API/GoogleMap";
+import Places from "./Components/API/GoogleMap";
 
 function App() {
   return (
     <>
-      
+      <Places />
     </>
   );
 }
