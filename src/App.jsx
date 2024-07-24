@@ -1,10 +1,12 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import Loading from "./Components/Loading/Loading";
+import Footer from "./Components/Outlet/Footer/Footer";
 
 function App() {
   return (
     <>
-      <Loading/>
+      <Outlet />
+      <Footer />
     </>
   );
 }

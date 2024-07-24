@@ -1,0 +1,22 @@
+footer {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  background-color: #5350C1;
+  bottom: 0;
+}
+
+footer h3 {
+  color: white;
+  margin: 50px;
+  font-family: "Merriweather", serif;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.merriweather-regular {
+  font-family: "Merriweather", serif;
+}
