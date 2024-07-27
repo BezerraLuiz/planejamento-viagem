@@ -1,9 +1,14 @@
 .loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.248);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  height: 100px;
+  z-index: 1;
 }
 
 .loader-dot {

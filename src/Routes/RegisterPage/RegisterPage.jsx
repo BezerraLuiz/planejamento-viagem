@@ -2,18 +2,24 @@ import style from "../RegisterPage/RegisterPage.module.css";
 import Footer from "../../Components/Outlet/Footer/Footer"
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from '../../Components/Loading/Loading'
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [repetirSenha, setRepetirSenha] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmitAccount = (e) => {
     e.preventDefault();
 
     if (senha == repetirSenha) {
-      navigate('/');
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate('/')  
+      }, 3000);
     } else {
       alert("Senhas diferentes!");
       setSenha('');
@@ -23,6 +29,7 @@ export default function RegisterPage() {
 
   return (
     <>
+      {isLoading && <Loading />}
       <div
         style={{
           display: "flex",
