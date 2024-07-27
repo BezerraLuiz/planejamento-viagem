@@ -1,17 +1,24 @@
-import style from "../LoginPage/LoginPage.module.css";
+import style from "../RegisterPage/RegisterPage.module.css";
 import Footer from "../../Components/Outlet/Footer/Footer"
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [repetirSenha, setRepetirSenha] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmitAccount = (e) => {
     e.preventDefault();
 
-    console.log(email);
-    console.log(senha);
+    if (senha == repetirSenha) {
+      navigate('/');
+    } else {
+      alert("Senhas diferentes!");
+      setSenha('');
+      setRepetirSenha('');
+    }
   };
 
   return (
@@ -30,7 +37,7 @@ export default function LoginPage() {
         <div className={style.container}>
           <div className={style.login}>
             <div className={style.titulo}>
-              <h1>Login</h1>
+              <h1>Cadastro</h1>
             </div>
             <form onSubmit={handleSubmitAccount} className={style.form} action="">
               <div className={style.container_input}>
@@ -53,16 +60,24 @@ export default function LoginPage() {
                   required
                   autoComplete="off"
                   onChange={(e) => setSenha(e.target.value)}
+                  value={senha}
                 />
               </div>
-              <div className={style.check}>
-                <input type="checkbox" />
-                <label htmlFor="check">Lembrar Senha</label>
+              <div className={style.container_input}>
+                <label htmlFor="password">Repetir Senha</label>
+                <input
+                  className={style.input}
+                  type="password"
+                  required
+                  autoComplete="off"
+                  onChange={(e) => setRepetirSenha(e.target.value)}
+                  value={repetirSenha}
+                />
               </div>
               <button id={style.button}>Entrar</button>
               <div className={style.register}>
-                <label htmlFor="registrar">Não possui cadastro?</label>
-                <Link to={`/registrar`}>Cadastrar-se.</Link>
+                <label htmlFor="registrar">Já possui cadastro?</label>
+                <Link to={`/login`}>Fazer login!</Link>
               </div>
             </form>
           </div>

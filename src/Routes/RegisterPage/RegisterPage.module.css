@@ -44,19 +44,13 @@
   }
 }
 
-.form .check {
-  display: flex;
-  gap: 15px;
-  margin: 5px 0 15px;
-}
-
 .form #button {
   width: 250px;
   height: 35px;
   border: none;
   background-color: steelblue;
   border-radius: 7px;
-  margin: 5px 0 15px;
+  margin: 10px 0 25px;
   font-size: 18px;
   color: white;
   cursor: pointer;
@@ -85,7 +79,7 @@
   border: 1.5px solid steelblue;
   background-color: white;
   border-radius: 7px;
-  margin: 5.5px 0;
+  margin: 5.5px 0 20px;
   padding: 7px;
 }
 
