@@ -15,9 +15,13 @@ export default function RegisterPage() {
     e.preventDefault();
 
     if (senha == repetirSenha) {
+      let i = 0;
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
+        // Salvando os dados no localStorage.
+        localStorage.setItem("email" + i, email); 
+        localStorage.setItem("senha" +i, senha); 
         navigate('/')  
       }, 3000);
     } else {
