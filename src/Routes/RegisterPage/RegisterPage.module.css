@@ -6,10 +6,9 @@
 
 .container .login {
   width: 500px;
-  height: 500px;
-  border: 2.5px solid steelblue;
+  height: 600px;
+  border: 5px solid steelblue;
   border-radius: 10px;
-  background-color: #f9f7f7;
 }
 
 .login .titulo {
@@ -60,7 +59,7 @@
   background-color: rgb(48, 91, 125);
 }
 
-.form .register {
+.form .logar {
   display: flex;
   gap: 15px;
 

@@ -1,21 +1,53 @@
 import style from "../LoginPage/LoginPage.module.css";
-import Footer from "../../Components/Outlet/Footer/Footer"
+import Footer from "../../Components/Outlet/Footer/Footer";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Loading from "../../Components/Loading/Loading";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmitAccount = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    console.log(email);
-    console.log(senha);
+    let emailFound = false;
+    let senhaFound = false;
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);
+
+      if (key.startsWith("email") && value === email) {
+        emailFound = true;
+      }
+
+      if (key.startsWith("senha") && value === senha) {
+        senhaFound = true;
+      }
+
+      if (emailFound && senhaFound) {
+        break;
+      }
+    }
+
+    if (emailFound && senhaFound) {
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/");
+      }, 3000);
+    } else {
+      setIsLoading(false);
+      alert(emailFound ? "Senha Incorreta!" : "Usuário não encontrado!");
+    }
   };
 
   return (
     <>
+      {isLoading && <Loading />}
       <div
         style={{
           display: "flex",
@@ -32,7 +64,11 @@ export default function LoginPage() {
             <div className={style.titulo}>
               <h1>Login</h1>
             </div>
-            <form onSubmit={handleSubmitAccount} className={style.form} action="">
+            <form
+              onSubmit={handleSubmitAccount}
+              className={style.form}
+              action=""
+            >
               <div className={style.container_input}>
                 <label htmlFor="email">E-mail</label>
                 <input

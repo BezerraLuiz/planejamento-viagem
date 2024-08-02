@@ -14,19 +14,19 @@ export default function RegisterPage() {
   const handleSubmitAccount = (e) => {
     e.preventDefault();
 
-    if (senha == repetirSenha) {
-      let i = 0;
+    if (senha === repetirSenha) {
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
-        // Salvando os dados no localStorage.
-        localStorage.setItem("email" + i, email); 
-        localStorage.setItem("senha" +i, senha); 
-        navigate('/')  
+
+        const index = localStorage.length / 2; // Cada conta ocupa duas chaves no localStorage
+        localStorage.setItem("senha" + index, senha);
+        localStorage.setItem("email" + index, email);
+
+        navigate('/login');
       }, 3000);
     } else {
       alert("Senhas diferentes!");
-      setSenha('');
       setRepetirSenha('');
     }
   };
@@ -85,8 +85,8 @@ export default function RegisterPage() {
                   value={repetirSenha}
                 />
               </div>
-              <button id={style.button}>Entrar</button>
-              <div className={style.register}>
+              <button id={style.button}>Cadastrar</button>
+              <div className={style.logar}>
                 <label htmlFor="registrar">Já possui cadastro?</label>
                 <Link to={`/login`}>Fazer login!</Link>
               </div>
