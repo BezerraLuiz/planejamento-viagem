@@ -9,3 +9,21 @@
 .merriweather-regular {
   font-family: "Merriweather", serif;
 }
+
+/* Molde para botões */
+
+/* .form #button {
+  width: 250px;
+  height: 35px;
+  border: none;
+  background-color: steelblue;
+  border-radius: 7px;
+  margin: 5px 0 15px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+#button:hover {
+  background-color: rgb(48, 91, 125);
+} */
