@@ -34,16 +34,7 @@ export default function RegisterPage() {
   return (
     <>
       {isLoading && <Loading />}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          minHeight: "88vh",
-          gap: "80px",
-        }}
-      >
+      <div id={style.container_main}>
         <h1 id={style.nome}>Router Airplane</h1>
         <div className={style.container}>
           <div className={style.login}>
