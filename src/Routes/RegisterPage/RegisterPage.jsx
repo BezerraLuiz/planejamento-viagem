@@ -11,20 +11,38 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmitAccount = (e) => {
+  const handleSubmitAccount = async (e) => {
     e.preventDefault();
 
     if (senha === repetirSenha) {
       setIsLoading(true);
-      setTimeout(() => {
+      
+      try {
+        // Enviar dados para o backend.
+        const response = await fetch('http://localhost:8000/api/register', {
+          method: "POST",
+          headers: {
+            "Content-Type": "applications/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            senha: senha,
+          }),
+        });
+
+        if (response.ok) {
+          console.log("Usuario registrado com sucesso!");
+          navigate("/login");
+        } else {
+          console.error("Erro ao registro do usuário | Erro no response.");
+          alert("Erro ao registrar o usuário");
+        }
+      } catch (error) {
+        console.log("Erro ao registrar o usuário | Erro no Try.");
+        alert('Erro ao criar a conta. Tente novamente mais tarde!');
+      } finally {
         setIsLoading(false);
-
-        const index = localStorage.length / 2; // Cada conta ocupa duas chaves no localStorage
-        localStorage.setItem("senha" + index, senha);
-        localStorage.setItem("email" + index, email);
-
-        navigate('/login');
-      }, 3000);
+      }
     } else {
       alert("Senhas diferentes!");
       setRepetirSenha('');
