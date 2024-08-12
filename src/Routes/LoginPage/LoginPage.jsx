@@ -10,38 +10,33 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmitAccount = (e) => {
+  const handleSubmitAccount = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    let emailFound = false;
-    let senhaFound = false;
+    try {
+      const response = await fetch("http://localhost:8080/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, senha }),
+      });
 
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const value = localStorage.getItem(key);
-
-      if (key.startsWith("email") && value === email) {
-        emailFound = true;
-      }
-
-      if (key.startsWith("senha") && value === senha) {
-        senhaFound = true;
-      }
-
-      if (emailFound && senhaFound) {
-        break;
-      }
-    }
-
-    if (emailFound && senhaFound) {
-      setTimeout(() => {
+      if (response.ok) {
+        setTimeout(() => {
+          setIsLoading(false);
+          navigate("/");
+        }, 3000);
+      } else {
+        const errorText = await response.text();
         setIsLoading(false);
-        navigate("/");
-      }, 3000);
-    } else {
+        alert(errorText);
+      }
+    } catch (error) {
       setIsLoading(false);
-      alert(emailFound ? "Senha Incorreta!" : "Usuário não encontrado!");
+      console.log("Erro no try: " + error);
+      alert("Erro ao tentar fazer login. Tente novamente mais tarde!");
     }
   };
 
