@@ -24,6 +24,7 @@ export default function LoginPage() {
       });
 
       if (response.ok) {
+        sessionStorage.setItem( "user", email)
         setTimeout(() => {
           setIsLoading(false);
           navigate("/");
@@ -80,7 +81,6 @@ export default function LoginPage() {
                 <input
                   className={style.input}
                   type="password"
-                  placeholder="Senha@123"
                   required
                   autoComplete="off"
                   onChange={(e) => setSenha(e.target.value)}

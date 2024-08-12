@@ -20,9 +20,9 @@ const router = createBrowserRouter([
     path: "/registrar",
     element: <RegisterPage />,
   },
-  { 
-    path: "/iniciar-viagem", 
-    element: <IniciarViagem /> 
+  {
+    path: "/iniciar-viagem",
+    element: <IniciarViagem />,
   },
 ]);
 

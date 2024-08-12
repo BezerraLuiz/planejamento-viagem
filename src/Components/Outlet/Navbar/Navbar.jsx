@@ -1,13 +1,23 @@
 import { LiaSearchLocationSolid } from "react-icons/lia";
 import "./Navbar.css";
-import { CiUser } from "react-icons/ci";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const searchBarRef = useRef(null);
   const [local, setLocal] = useState("");
   const navigate = useNavigate();
+  const [userLogado, setUserLogado] = useState('');
+
+  useEffect(() => {
+    console.log(userLogado);
+
+    if (!userLogado) {
+      setUserLogado('Login');
+    } else {
+      setUserLogado("Olá, " + sessionStorage.getItem("user"));
+    }
+  }, []);
 
   const handleFocus = () => {
     if (searchBarRef.current) {
@@ -26,10 +36,10 @@ export default function Navbar() {
     console.log(local);
   };
 
-  const handleNavigateLogin = () => {
-    navigate('/login')
-  }
-  
+  const handleNavigateUser = () => {
+    navigate("/login");
+  };
+
   return (
     <>
       <nav>
@@ -58,9 +68,7 @@ export default function Navbar() {
           </form>
         </div>
 
-        <CiUser id="icon-navbar"
-          onClick={handleNavigateLogin}
-        />
+        <h3 onClick={handleNavigateUser}>{userLogado}</h3>
       </nav>
     </>
   );
