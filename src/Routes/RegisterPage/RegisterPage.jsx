@@ -19,10 +19,10 @@ export default function RegisterPage() {
       
       try {
         // Enviar dados para o backend.
-        const response = await fetch('http://localhost:8000/api/register', {
+        const response = await fetch('http://localhost:8080/api/users/register', {
           method: "POST",
           headers: {
-            "Content-Type": "applications/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             email: email,

@@ -1,16 +1,30 @@
 package com.planejamentoviagem.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
-    private String email;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private  String email;
+
+    @Column(nullable = false)
     private String senha;
 
-    // Construtores.
-    public User(String email, String senha) {
-        this.email = email;
-        this.senha = senha;
+    // Getters e Setters
+    public Long getId() {
+        return id;
     }
 
-    // Getters e Setters.
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -24,6 +38,6 @@ public class User {
     }
 
     public void setSenha(String senha) {
-        this.email = senha;
+        this.senha = senha;
     }
 }
