@@ -93,7 +93,7 @@
   font-size: 50px;
 }
 
-@media (max-width:961px) {
+@media (min-width:961px) {
   .container .login {
     width: 400px;
     height: 400px;
