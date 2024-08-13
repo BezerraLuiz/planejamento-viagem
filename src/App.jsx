@@ -10,6 +10,7 @@ function App() {
   useEffect(() => {
     // Verificar se há e-mail e senha salvos no localStorage.
     // Se tiver, faz o login (salva no sessionStorage), se não, faz nada.
+    
   }, []);
 
   return (

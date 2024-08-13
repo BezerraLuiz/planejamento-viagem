@@ -77,4 +77,25 @@ public class UserController {
 
         return new ResponseEntity<>("Dados do usuário atualizado com sucesso!", HttpStatus.OK);
     }
+
+    @Transactional
+    @PostMapping("/me")
+    public ResponseEntity<String> meLogin(@RequestBody User emRequest) {
+        // Buscar o usuário no banco através do e-mail.
+        String sqlBuscaUser = "select u from User u where u.email = :email";
+        TypedQuery<User> query = entityManager.createQuery(sqlBuscaUser, User.class);
+        query.setParameter("email", emRequest.getEmail());
+
+        List<User> users = query.getResultList();
+
+        if (users.isEmpty()) {
+            // Se o usuário não for encontrado, retornar erro.
+            return new ResponseEntity<>("Usuário Não Encontrado!", HttpStatus.NOT_FOUND);
+        }
+
+        User user = users.get(0);
+
+        // Se o for encontrado a senha for bem-sucedido.
+        return new ResponseEntity<>(user.getSenha(), HttpStatus.OK);
+    }
 }

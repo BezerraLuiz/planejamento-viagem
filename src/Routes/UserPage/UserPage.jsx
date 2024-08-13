@@ -3,12 +3,39 @@ import Footer from "../../Components/Outlet/Footer/Footer";
 import { FaRegEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserPage() {
-  const [senha, setSenha] = useState(sessionStorage.getItem("password"));
+  const [senha, setSenha] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/users/me", {
+          method: "POST", // Alterado para POST
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: sessionStorage.getItem("user") }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setSenha(data); // Assumindo que o backend retorna a senha
+        } else {
+          const errorText = await response.text();
+          alert(errorText);
+        }
+      } catch (error) {
+        console.log("Erro no fetch: " + error);
+        alert("Erro ao carregar dados do usuário. Tente novamente mais tarde!");
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleSaveChanges = async () => {
     setIsLoading(true);
@@ -53,6 +80,7 @@ export default function UserPage() {
   const handleLogout = () => {
     setIsLoading(true);
     sessionStorage.clear();
+    localStorage.clear("lembrarUsuario");
 
     setTimeout(() => {
       setIsLoading(false);

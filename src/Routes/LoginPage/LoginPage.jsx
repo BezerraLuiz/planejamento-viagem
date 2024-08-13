@@ -1,6 +1,6 @@
 import style from "../LoginPage/LoginPage.module.css";
 import Footer from "../../Components/Outlet/Footer/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
 
@@ -9,6 +9,10 @@ export default function LoginPage() {
   const [senha, setSenha] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.clear("lembrarUsuario");
+  }, []);
 
   const handleSubmitAccount = async (e) => {
     e.preventDefault();
@@ -24,8 +28,7 @@ export default function LoginPage() {
       });
 
       if (response.ok) {
-        sessionStorage.setItem( "user", email)
-        sessionStorage.setItem( "password", senha)
+        sessionStorage.setItem("user", email);
         setTimeout(() => {
           setIsLoading(false);
           navigate("/");
@@ -39,6 +42,16 @@ export default function LoginPage() {
       setIsLoading(false);
       console.log("Erro no try: " + error);
       alert("Erro ao tentar fazer login. Tente novamente mais tarde!");
+    }
+  };
+
+  const handleRememberAccount = () => {
+    const checkbox = document.getElementById("check");
+
+    if (checkbox.checked) {
+      localStorage.setItem("lembrarUsuario", email);
+    } else {
+      localStorage.clear("lembrarUsuario");
     }
   };
 
@@ -87,9 +100,13 @@ export default function LoginPage() {
                   onChange={(e) => setSenha(e.target.value)}
                 />
               </div>
-              <div className={style.check}>
-                <input type="checkbox" />
-                <label htmlFor="check">Lembrar Senha</label>
+              <div className={style.container_check}>
+                <input
+                  type="checkbox"
+                  id="check"
+                  onChange={handleRememberAccount}
+                />
+                <label htmlFor="check">Lembrar Usuário</label>
               </div>
               <button id={style.button}>Entrar</button>
               <div className={style.register}>

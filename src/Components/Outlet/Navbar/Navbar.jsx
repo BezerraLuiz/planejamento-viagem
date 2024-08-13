@@ -10,7 +10,7 @@ export default function Navbar() {
   const [userLogado, setUserLogado] = useState("");
 
   useEffect(() => {
-    let logado = (sessionStorage.getItem("user"));
+    let logado = sessionStorage.getItem("user");
 
     if (!logado) {
       setUserLogado("Login");
@@ -37,7 +37,7 @@ export default function Navbar() {
   };
 
   const handleNavigateUser = () => {
-    let logado = (sessionStorage.getItem("user"));
+    let logado = sessionStorage.getItem("user");
     console.log(logado);
 
     if (!logado) {
@@ -52,27 +52,29 @@ export default function Navbar() {
       <nav>
         <h1>Router Airplane</h1>
 
-        <div id="search-bar" ref={searchBarRef}>
-          <LiaSearchLocationSolid />
-          <form
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onSubmit={handleSearch}
-            action=""
-          >
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Digite o local da viagem..."
-              autoComplete="off"
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              onChange={(e) => setLocal(e.target.value)}
-            />
-          </form>
+        <div id="container-bar">
+          <div id="search-bar" ref={searchBarRef}>
+            <LiaSearchLocationSolid />
+            <form
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onSubmit={handleSearch}
+              action=""
+            >
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Digite o local da viagem..."
+                autoComplete="off"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                onChange={(e) => setLocal(e.target.value)}
+              />
+            </form>
+          </div>
         </div>
 
         <h3 onClick={handleNavigateUser}>{userLogado}</h3>
