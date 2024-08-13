@@ -7,13 +7,13 @@ export default function Navbar() {
   const searchBarRef = useRef(null);
   const [local, setLocal] = useState("");
   const navigate = useNavigate();
-  const [userLogado, setUserLogado] = useState('');
+  const [userLogado, setUserLogado] = useState("");
 
   useEffect(() => {
-    console.log(userLogado);
+    let logado = (sessionStorage.getItem("user"));
 
-    if (!userLogado) {
-      setUserLogado('Login');
+    if (!logado) {
+      setUserLogado("Login");
     } else {
       setUserLogado("Olá, " + sessionStorage.getItem("user"));
     }
@@ -37,7 +37,14 @@ export default function Navbar() {
   };
 
   const handleNavigateUser = () => {
-    navigate("/login");
+    let logado = (sessionStorage.getItem("user"));
+    console.log(logado);
+
+    if (!logado) {
+      navigate("/login");
+    } else {
+      navigate("/user");
+    }
   };
 
   return (

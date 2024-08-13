@@ -25,6 +25,7 @@ export default function LoginPage() {
 
       if (response.ok) {
         sessionStorage.setItem( "user", email)
+        sessionStorage.setItem( "password", senha)
         setTimeout(() => {
           setIsLoading(false);
           navigate("/");
