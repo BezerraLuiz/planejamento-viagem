@@ -1,12 +1,14 @@
 import style from "./IniciarViagem.module.css";
 import Footer from "../../Components/Outlet/Footer/Footer";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function IniciarViagem() {
   const [valorPassagem, setValorPassagem] = useState("");
   const [valorHospedagem, setValorHospedagem] = useState("");
   const [valorConsumo, setValorConsumo] = useState("");
   const [valorTotal, setValorTotal] = useState("");
+  const navigate = useNavigate();
 
   const handleFormatarMoeda = (e, setState) => {
     let value = e.target.value;
@@ -21,6 +23,10 @@ export default function IniciarViagem() {
     });
 
     setState(value);
+  };
+
+  const handleCancel = () => {
+    navigate("/");
   };
 
   return (
@@ -38,11 +44,21 @@ export default function IniciarViagem() {
               >
                 <div className={style.container_input}>
                   <label htmlFor="localViagem">Local da Viagem</label>
-                  <input id="localViagem" type="text" autoComplete="off" required/>
+                  <input
+                    id="localViagem"
+                    type="text"
+                    autoComplete="off"
+                    required
+                  />
                 </div>
                 <div className={style.container_input}>
                   <label htmlFor="localHospedagem">Local da Hospedagem</label>
-                  <input id="localHospedagem" type="text" autoComplete="off" required/>
+                  <input
+                    id="localHospedagem"
+                    type="text"
+                    autoComplete="off"
+                    required
+                  />
                 </div>
               </div>
               <div
@@ -54,11 +70,16 @@ export default function IniciarViagem() {
               >
                 <div className={style.container_input}>
                   <label htmlFor="dataInicio">Data Início</label>
-                  <input id="dataInicio" type="date" autoComplete="off" required/>
+                  <input
+                    id="dataInicio"
+                    type="date"
+                    autoComplete="off"
+                    required
+                  />
                 </div>
                 <div className={style.container_input}>
                   <label htmlFor="dataFim">Data Fim</label>
-                  <input id="dataFim" type="date" autoComplete="off" required/>
+                  <input id="dataFim" type="date" autoComplete="off" required />
                 </div>
               </div>
             </div>
@@ -108,7 +129,9 @@ export default function IniciarViagem() {
               }}
             >
               <div className={style.container_input}>
-                <label htmlFor="valorConsumo">Valor estipulado para consumo</label>
+                <label htmlFor="valorConsumo">
+                  Valor estipulado para consumo
+                </label>
                 <input
                   id="valorConsumo"
                   type="text"
@@ -137,7 +160,7 @@ export default function IniciarViagem() {
             </div>
 
             <div id={style.container_btn}>
-              <span>Cancelar</span>
+              <span onClick={handleCancel}>Cancelar</span>
               <button>Salvar Alterações</button>
             </div>
           </form>
