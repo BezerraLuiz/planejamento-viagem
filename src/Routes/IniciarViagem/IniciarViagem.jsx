@@ -1,6 +1,25 @@
 import style from "./IniciarViagem.module.css";
+import Footer from "../../Components/Outlet/Footer/Footer";
+import { useState } from "react";
 
 export default function IniciarViagem() {
+  const [valorPassagem, setValorPassagem] = useState('');
+
+  const handleFormatarMoeda = (e) => {
+    let value = e.target.value;
+
+    // Remove todos os caracteres que não sejam dígitos
+    value = value.replace(/\D/g, '');
+
+    // Formata o valor para moeda BR.
+    value = (Number(value) / 100).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
+
+    setValorPassagem(value);
+  }
+  
   return (
     <>
       <div id={style.container_main}>
@@ -42,9 +61,46 @@ export default function IniciarViagem() {
             </div>
           </form>
 
-          
+          <div id={style.container_orcamento}>
+            <span></span>
+            <p>Orçamento</p>
+            <span></span>
+          </div>
+
+          <div>
+            <div>
+              <label htmlFor="">Valor Passagem</label>
+              <input type="text"
+                value={valorPassagem}
+                onChange={handleFormatarMoeda}
+              />
+            </div>
+            <div>
+              <label htmlFor="">Valor Hospedagem</label>
+              <input type="text"
+                value={valorPassagem}
+                onChange={handleFormatarMoeda}
+              />
+            </div>
+            <div>
+              <label htmlFor="">Valor estipulado para consumo</label>
+              <input type="text"
+                value={valorPassagem}
+                onChange={handleFormatarMoeda}
+              />
+            </div>
+            <div>
+              <label htmlFor="">Total</label>
+              <input type="text"
+                value={valorPassagem}
+                onChange={handleFormatarMoeda}
+              />
+            </div>
+          </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

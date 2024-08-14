@@ -1,7 +1,7 @@
 import style from "./UserPage.module.css";
 import Footer from "../../Components/Outlet/Footer/Footer";
 import { FaRegEdit } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
 import { useEffect, useState } from "react";
 
@@ -77,6 +77,10 @@ export default function UserPage() {
     input.style.backgroundColor = "white";
   };
 
+ const handleCancel = () => {
+  navigate('/');
+ }
+
   const handleLogout = () => {
     setIsLoading(true);
     sessionStorage.clear();
@@ -120,8 +124,8 @@ export default function UserPage() {
             </div>
           </div>
           <div id={style.container_btn}>
-            <span>
-              <Link to={`/`}>Cancelar</Link>
+            <span onClick={handleCancel}>
+              Cancelar
             </span>
             <span onClick={handleSaveChanges}>Salvar Alterações</span>
           </div>
