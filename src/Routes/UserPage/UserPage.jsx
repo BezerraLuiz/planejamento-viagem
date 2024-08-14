@@ -127,7 +127,7 @@ export default function UserPage() {
             <span onClick={handleCancel}>
               Cancelar
             </span>
-            <span onClick={handleSaveChanges}>Salvar Alterações</span>
+            <button onClick={handleSaveChanges}>Salvar Alterações</button>
           </div>
         </div>
       </div>
