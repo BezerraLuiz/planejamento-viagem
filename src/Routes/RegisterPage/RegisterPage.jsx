@@ -35,10 +35,10 @@ export default function RegisterPage() {
           navigate("/login");
         } else {
           console.error("Erro ao registro do usuário | Erro no response.");
-          alert("Erro ao registrar o usuário");
+          alert("Erro ao registrar o usuário!");
         }
       } catch (error) {
-        console.log("Erro ao registrar o usuário | Erro no Try.");
+        console.log("Erro ao registrar o usuário | Erro no Try: " + error);
         alert('Erro ao criar a conta. Tente novamente mais tarde!');
       } finally {
         setIsLoading(false);

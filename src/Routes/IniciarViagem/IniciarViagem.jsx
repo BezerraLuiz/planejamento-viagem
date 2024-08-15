@@ -1,14 +1,93 @@
 import style from "./IniciarViagem.module.css";
 import Footer from "../../Components/Outlet/Footer/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../Components/Loading/Loading";
 
 export default function IniciarViagem() {
+  const [idUser, setIdUser] = useState("");
+  const [localViagem, setLocalViagem] = useState("");
+  const [localHospedagem, setLocalHospedagem] = useState("");
+  const [dataInicio, setDataInicio] = useState("");
+  const [dataFim, setDataFim] = useState("");
   const [valorPassagem, setValorPassagem] = useState("");
   const [valorHospedagem, setValorHospedagem] = useState("");
   const [valorConsumo, setValorConsumo] = useState("");
   const [valorTotal, setValorTotal] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/users/getUserId",
+          {
+            method: "POST", // Alterado para POST
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: sessionStorage.getItem("user") }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setIdUser(data); // Assumindo que o backend retorna a senha
+          console.log("Id: " + data);
+        } else {
+          const errorText = await response.text();
+          alert(errorText);
+        }
+      } catch (error) {
+        console.log("Erro no fetch: " + error);
+        alert("Erro ao carregar id do usuário. Tente novamente mais tarde!");
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleSubmitViagem = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    setValorTotal(valorPassagem + valorHospedagem + valorConsumo);
+
+    try {
+      // Enviar dados para o backend.
+      const response = await fetch("http://localhost:8080/api/viagens/iniciar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idUser: idUser,
+          localViagem: localViagem,
+          localHospedagem: localHospedagem,
+          dataInicio: dataInicio,
+          dataFim: dataFim,
+          valorPassagem: valorPassagem,
+          valorHospedagem: valorHospedagem,
+          valorConsumo: valorConsumo,
+          valorTotal: valorTotal,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Viagem iniciada com sucesso!");
+        navigate("/");
+      } else {
+        console.error("Erro ao iniciar viagem | Erro no response.");
+        alert("Erro ao iniciar viagem!");
+      }
+    } catch (error) {
+      console.log("Erro ao iniciar viagem | Erro no try: " + error);
+      alert("Erro ao iniciar viagem");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleFormatarMoeda = (e, setState) => {
     let value = e.target.value;
@@ -31,6 +110,7 @@ export default function IniciarViagem() {
 
   return (
     <>
+      {isLoading && <Loading />}
       <div id={style.container_main}>
         <div id={style.container}>
           <form id={style.form} action="" onSubmit={(e) => e.preventDefault()}>
@@ -49,6 +129,8 @@ export default function IniciarViagem() {
                     type="text"
                     autoComplete="off"
                     required
+                    value={localViagem}
+                    onChange={(e) => setLocalViagem(e.target.value)}
                   />
                 </div>
                 <div className={style.container_input}>
@@ -58,6 +140,8 @@ export default function IniciarViagem() {
                     type="text"
                     autoComplete="off"
                     required
+                    value={localHospedagem}
+                    onChange={(e) => setLocalHospedagem(e.target.value)}
                   />
                 </div>
               </div>
@@ -75,11 +159,20 @@ export default function IniciarViagem() {
                     type="date"
                     autoComplete="off"
                     required
+                    value={dataInicio}
+                    onChange={(e) => setDataInicio(e.target.value)}
                   />
                 </div>
                 <div className={style.container_input}>
                   <label htmlFor="dataFim">Data Fim</label>
-                  <input id="dataFim" type="date" autoComplete="off" required />
+                  <input
+                    id="dataFim"
+                    type="date"
+                    autoComplete="off"
+                    required
+                    value={dataFim}
+                    onChange={(e) => setDataFim(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
@@ -161,7 +254,7 @@ export default function IniciarViagem() {
 
             <div id={style.container_btn}>
               <span onClick={handleCancel}>Cancelar</span>
-              <button>Salvar Alterações</button>
+              <button onClick={handleSubmitViagem}>Salvar Alterações</button>
             </div>
           </form>
         </div>

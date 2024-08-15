@@ -58,7 +58,7 @@ export default function UserPage() {
         setTimeout(() => {
           setIsLoading(false);
           navigate("/");
-        }, 3000);
+        }, 1000);
       } else {
         const errorText = await response.text();
         setIsLoading(false);

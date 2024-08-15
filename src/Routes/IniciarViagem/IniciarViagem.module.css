@@ -127,16 +127,3 @@
   background-color: gray;
   margin: 30px 0;
 }
-
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-  .field-group {
-    flex-direction: column;
-  }
-
-  #container_btn {
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 15px;
-  }
-}
