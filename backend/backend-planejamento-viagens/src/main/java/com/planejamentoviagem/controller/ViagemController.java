@@ -28,7 +28,7 @@ public class ViagemController {
         entityManager.persist(viagem);
 
         System.out.println("Viagem iniciada com sucesso!");
-        System.out.println("ID da viagem: " + viagem.getId());
+        System.out.println("ID da viagem: " + viagem.getIdViagem());
 
         return new ResponseEntity<>("Viagem iniciada com sucesso!", HttpStatus.OK);
     }

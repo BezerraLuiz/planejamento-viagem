@@ -1,6 +1,8 @@
 package com.planejamentoviagem.model;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "viagens")
@@ -8,10 +10,11 @@ public class Viagem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_viagem")
+    private Long idViagem;
 
     @Column(nullable = false)
-    private String idUser;
+    private Long idUser; // Alterado para Long, supondo que o ID do usuário seja numérico.
 
     @Column(nullable = false)
     private String localViagem;
@@ -20,37 +23,38 @@ public class Viagem {
     private String localHospedagem;
 
     @Column(nullable = false)
-    private String dataInicio;
+    private LocalDate dataInicio;  // Mantido como LocalDate
 
     @Column(nullable = false)
-    private String dataFim;
+    private LocalDate dataFim;  // Mantido como LocalDate
 
     @Column(nullable = false)
-    private String valorPassagem;
+    private BigDecimal valorPassagem;  // Mantido como BigDecimal
 
     @Column(nullable = false)
-    private String valorHospedagem;
+    private BigDecimal valorHospedagem;  // Mantido como BigDecimal
 
     @Column(nullable = false)
-    private String valorConsumo;
+    private BigDecimal valorConsumo;  // Mantido como BigDecimal
 
     @Column(nullable = false)
-    private String valorTotal;
+    private BigDecimal valorTotal;  // Mantido como BigDecimal
 
     // Getters e Setters.
-    public Long getId() {
-        return id;
+
+    public Long getIdViagem() {
+        return idViagem;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdViagem(Long idViagem) {
+        this.idViagem = idViagem;
     }
 
-    public String getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(Long idUser) {
         this.idUser = idUser;
     }
 
@@ -70,51 +74,51 @@ public class Viagem {
         this.localHospedagem = localHospedagem;
     }
 
-    public String getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public String getDataFim() {
+    public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(String dataFim) {
+    public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
 
-    public String getValorPassagem() {
+    public BigDecimal getValorPassagem() {
         return valorPassagem;
     }
 
-    public void setValorPassagem(String valorPassagem) {
+    public void setValorPassagem(BigDecimal valorPassagem) {
         this.valorPassagem = valorPassagem;
     }
 
-    public String getValorHospedagem() {
+    public BigDecimal getValorHospedagem() {
         return valorHospedagem;
     }
 
-    public void setValorHospedagem(String valorHospedagem) {
+    public void setValorHospedagem(BigDecimal valorHospedagem) {
         this.valorHospedagem = valorHospedagem;
     }
 
-    public String getValorConsumo() {
+    public BigDecimal getValorConsumo() {
         return valorConsumo;
     }
 
-    public void setValorConsumo(String valorConsumo) {
+    public void setValorConsumo(BigDecimal valorConsumo) {
         this.valorConsumo = valorConsumo;
     }
 
-    public String getValorTotal() {
+    public BigDecimal getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(String valorTotal) {
+    public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
     }
 }

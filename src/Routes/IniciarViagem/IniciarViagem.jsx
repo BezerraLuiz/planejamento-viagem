@@ -51,9 +51,21 @@ export default function IniciarViagem() {
   const handleSubmitViagem = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    setValorTotal(valorPassagem + valorHospedagem + valorConsumo);
-
+  
+    // Função para converter valores monetários para números
+    const convertToNumber = (valor) => {
+      return parseFloat(valor.replace("R$", "").replace(/\./g, "").replace(",", "."));
+    };
+  
+    // Convertendo valores
+    const valorPassagemNum = convertToNumber(valorPassagem);
+    const valorHospedagemNum = convertToNumber(valorHospedagem);
+    const valorConsumoNum = convertToNumber(valorConsumo);
+  
+    // Calculando o valor total
+    const valorTotalCalculado = valorPassagemNum + valorHospedagemNum + valorConsumoNum;
+    setValorTotal('R$ ' + valorTotalCalculado);
+  
     try {
       // Enviar dados para o backend.
       const response = await fetch("http://localhost:8080/api/viagens/iniciar", {
@@ -67,13 +79,13 @@ export default function IniciarViagem() {
           localHospedagem: localHospedagem,
           dataInicio: dataInicio,
           dataFim: dataFim,
-          valorPassagem: valorPassagem,
-          valorHospedagem: valorHospedagem,
-          valorConsumo: valorConsumo,
-          valorTotal: valorTotal,
+          valorPassagem: valorPassagemNum,
+          valorHospedagem: valorHospedagemNum,
+          valorConsumo: valorConsumoNum,
+          valorTotal: valorTotalCalculado,
         }),
       });
-
+  
       if (response.ok) {
         console.log("Viagem iniciada com sucesso!");
         navigate("/");
@@ -87,7 +99,7 @@ export default function IniciarViagem() {
     } finally {
       setIsLoading(false);
     }
-  };
+  };  
 
   const handleFormatarMoeda = (e, setState) => {
     let value = e.target.value;
