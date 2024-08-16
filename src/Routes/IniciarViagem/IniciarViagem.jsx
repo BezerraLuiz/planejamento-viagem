@@ -40,7 +40,7 @@ export default function IniciarViagem() {
           alert(errorText);
         }
       } catch (error) {
-        console.log("Erro no fetch: " + error);
+        console.log("Erro no try: " + error);
         alert("Erro ao carregar id do usuário. Tente novamente mais tarde!");
       }
     };

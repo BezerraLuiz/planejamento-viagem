@@ -32,4 +32,22 @@ public class ViagemController {
 
         return new ResponseEntity<>("Viagem iniciada com sucesso!", HttpStatus.OK);
     }
+
+    @Transactional
+    @GetMapping("/get-viagens")
+    public ResponseEntity<List<Viagem>> dadosViagens(@RequestHeader("User-Id") Long userId) {
+        // Ajuste a query para refletir a estrutura correta da tabela
+        String sqlBuscaViagens = "select v from Viagem v where v.idUser = :id";
+        TypedQuery<Viagem> query = entityManager.createQuery(sqlBuscaViagens, Viagem.class);
+        query.setParameter("id", userId);
+
+        List<Viagem> viagens = query.getResultList();
+
+        // Verifica se a lista está vazia e retorna a resposta adequada
+        if (viagens.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Status 204 se não houver viagens
+        }
+
+        return new ResponseEntity<>(viagens, HttpStatus.OK); // Status 200 se houver viagens
+    }
 }
