@@ -79,6 +79,7 @@ export default function Viagem() {
             //   console.log(`Valor do Consumo: ${valorConsumo}`);
             //   console.log(`Valor Total: ${valorTotal}`);
             // });
+            
           } else {
             const errorText = await response.text();
             alert(errorText);
