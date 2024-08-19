@@ -1,66 +1,109 @@
-# Descrição do Projeto: Aplicativo de Planejamento de Viagem
+## Router Airplane - Planejamento de Viagens
 
-## Funcionalidades
+### Índice
+1. [Descrição](#descrição)
+2. [Integrantes](#integrantes)
+3. [Ferramentas Utilizadas](#ferramentas-utilizadas)
+4. [Modelo Físico](#modelo-físico)
+5. [Scripts SQL](#scripts-sql)
+6. [Código Fonte do CRUD](#código-fonte-do-crud)
+7. [Instalação do Ambiente React.js](#instalação-do-ambiente-reactjs)
 
-1. **Criação e Edição de Itinerários de Viagem:**
-   - Permite que os usuários criem itinerários detalhados para suas viagens.
-   - Os usuários podem adicionar dias específicos ao itinerário e organizar atividades para cada dia.
+### Descrição
+O Router Airplane é um sistema para gerenciamento de viagens, controle de gastos e datas. Nele você salva e controla suas próximas viagens tendo acesso a valores gastos na viagem, datas de início e fim, local de ida e hospedagem. Com controle de usuários para não perder seus registros, barra de busca para encontrar a viagem que deseja e visualização do local da viagem detalhada através da API do Google Maps (Places).
 
-2. **Adicionar Pontos de Interesse, Restaurantes e Atividades:**
-   - Os usuários podem buscar e adicionar locais de interesse, restaurantes e atividades usando a API do Google Places.
-   - Cada ponto de interesse pode incluir detalhes como horário de funcionamento, avaliações, fotos e informações de contato.
+### Integrantes
+Luiz Antônio Bezerra - [BezzeraLuiz](https://github.com/BezerraLuiz)<br>
+...
 
-3. **Gerenciamento de Orçamento:**
-   - Permite que os usuários definam um orçamento total para a viagem.
-   - Adicione despesas estimadas e reais para categorias como transporte, alimentação, hospedagem e atividades.
-   - Monitore a diferença entre o orçamento planejado e o gasto real.
+### Ferramentas Utilizadas
+- React.js
+- HTML, CSS e JS
+- Java
+- PostgreSQL
+- API Google Maps (Places)
 
-4. **Integração com APIs de Mapas:**
-   - Utilize o Google Maps para visualização e navegação de locais.
-   - Exiba todos os pontos de interesse e atividades no mapa, permitindo que os usuários planejem rotas e visualizem a proximidade entre os locais.
+### Modelo Físico
+Utilizado a ferramenta de modelagem de dados [dbdiagram.io](https://dbdiagram.io/) para criação do modelo físico do banco de dados, para posterior exportação dos scripts DDL das tabelas e relacionamentos.<br>
+Arquivo fonte: [Modelo Físico](https://dbdiagram.io/d/66c3ad358b4bb5230e851997).<br>
 
-## Tecnologias
+![image](database/modelo_fisico.png)
 
-1. **React.js:**
-   - Usado para construir a interface do usuário.
-   - Componentes reutilizáveis e estado gerenciado com hooks como `useState` e `useEffect`.
+### Scripts SQL
+Para este projeto foi utilizado o banco de dados [PostgreSQL].<br>
 
-2. **Google Places API:**
-   - Fornece informações detalhadas sobre locais, incluindo endereços, avaliações e fotos.
-   - Permite busca de locais próximos com base na localização do usuário.
+#### Criando um Banco de Dados PostgreSQL no Windows
 
-3. **LocalStorage ou Backend:**
-   - **LocalStorage:** Armazene informações de viagem no navegador para persistência rápida e fácil de dados.
-   - **Backend:** Utilize um backend como Node.js com um banco de dados (por exemplo, MongoDB) para armazenamento de dados mais robusto e seguro.
+1. **Instalar o PostgreSQL**
+   - **Baixar:** [PostgreSQL para Windows](https://www.postgresql.org/download/windows/).
+   - **Instalar:**
+     - Execute o instalador.
+     - Defina a senha para o usuário `postgres`.
+     - Instale componentes como servidor PostgreSQL, pgAdmin e Stack Builder.
 
-4. **react-google-maps:**
-   - Biblioteca para integrar mapas do Google com componentes React.
-   - Facilita a exibição de mapas interativos e a marcação de pontos de interesse.
+2. **Configurar Variáveis de Ambiente (opcional)**
+   - Adicione o caminho `C:\Program Files\PostgreSQL\X.X\bin` à variável `Path`:
+     - Vá para "Painel de Controle" > "Sistema" > "Configurações avançadas do sistema".
+     - Clique em "Variáveis de Ambiente" e edite `Path`.
 
-## Fluxo de Trabalho
+3. **Acessar o PostgreSQL**
+   - **pgAdmin:**
+     - Abra o pgAdmin, crie um servidor (`localhost`) e use a senha definida.
+   
+   - **psql:**
+     - No prompt de comando, digite `psql -U postgres` e insira a senha.
 
-1. **Configuração Inicial:**
-   - Configuração do ambiente de desenvolvimento com React.js.
-   - Instalação de dependências necessárias como `react-google-maps` e configuração da API do Google Places.
+4. **Criar um Novo Banco de Dados**
+   - **pgAdmin:**
+     - Clique com o botão direito em "Databases" > "Create" > "Database...".
+   
+   - **psql:**
+     - Execute `CREATE DATABASE nome_do_banco;` para criar o banco.
 
-2. **Desenvolvimento de Componentes:**
-   - **Componentes de Itinerário:** Formulários para adicionar e editar dias e atividades.
-   - **Componentes de Mapa:** Exibição de mapas e marcação de pontos de interesse.
-   - **Componentes de Orçamento:** Formulários para adicionar despesas e exibir resumo do orçamento.
+5. **Configurar e Testar**
+   - Configure tabelas e usuários conforme necessário.
+   - Teste a conexão via `psql` ou pgAdmin.
 
-3. **Integração com APIs:**
-   - Configuração e uso da Google Places API para buscar e exibir informações de locais.
-   - Integração do Google Maps para visualização de mapas e rotas.
+Abaixo, segue o script SQL:
++ [DDL](https://github.com/BezerraLuiz/planejamento-viagem/tree/main/database/DDL)
 
-4. **Gerenciamento de Dados:**
-   - Implementação de armazenamento de dados usando LocalStorage ou um backend.
-   - Sincronização de dados de viagem com o backend, se aplicável.
+### Código Fonte do CRUD
+- Linguagem de Programação Java<br>
+- Framework SpringBoot
+- JavaSPA e PostgreSQL driver
 
-5. **Teste e Depuração:**
-   - Teste de todos os componentes e funcionalidades para garantir que funcionem corretamente.
-   - Depuração de problemas e otimização de desempenho.
+### Instalação do Ambiente React.js
 
-6. **Desdobramento:**
-   - Configuração e desdobramento do aplicativo em uma plataforma de hospedagem como Netlify, Vercel ou Heroku.
+Para configurar o ambiente React.js, siga os passos abaixo:
 
-Este projeto fornecerá uma ferramenta útil para viajantes planejarem e organizarem suas viagens de forma eficiente, com todos os recursos necessários em um só lugar.
+1. **Clonar o Repositório**
+   - Abra o prompt de comando ou terminal e execute:
+     ```bash
+     git clone https://github.com/BezerraLuiz/planejamento-viagem.git
+     ```
+   - Navegue até o diretório do projeto:
+     ```bash
+     cd planejamento-viagem
+     ```
+
+2. **Instalar Dependências**
+   - Execute o seguinte comando para instalar as dependências do projeto:
+     ```bash
+     npm install
+     ```
+
+3. **Iniciar o Servidor de Desenvolvimento**
+   - Após a instalação das dependências, inicie o servidor de desenvolvimento com:
+     ```bash
+     npm run dev
+     ```
+   - Isso abrirá seu navegador padrão com a aplicação React em execução.
+  
+### Inicialização do Backend
+
+Para configurar o backend, siga os passos abaixo:
+
+1. **Inicie o App.java**
+   - Execute o App.java localizado na pasta backend para conectar ao banco.
+
+O código-fonte do projeto pode ser encontrado no repositório do GitHub: [Código Fonte](https://github.com/BezerraLuiz/planejamento-viagem/tree/main/frontend)
