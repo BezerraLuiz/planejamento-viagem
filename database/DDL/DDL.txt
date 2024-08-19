@@ -1,0 +1,21 @@
+-- Tabela 'user'
+CREATE TABLE "user" (
+    user_id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+);
+
+-- Tabela 'viagens'
+CREATE TABLE viagens (
+    id_viagem SERIAL PRIMARY KEY,
+    id_user INT NOT NULL,
+    local_viagem VARCHAR(255) NOT NULL,
+    local_hospedagem VARCHAR(255) NOT NULL,
+    data_inicio DATE NOT NULL,
+    data_fim DATE NOT NULL,
+    valor_passagem DECIMAL(10, 2) NOT NULL,
+    valor_hospedagem DECIMAL(10, 2) NOT NULL,
+    valor_consumo DECIMAL(10, 2) NOT NULL,
+    valor_total DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_user) REFERENCES "user" (user_id)
+);
