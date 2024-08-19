@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ searchTerm, setSearchTerm }) {
   const searchBarRef = useRef(null);
   const [local, setLocal] = useState("");
   const navigate = useNavigate();
@@ -21,24 +21,28 @@ export default function Navbar() {
 
   const handleFocus = () => {
     if (searchBarRef.current) {
-      searchBarRef.current.classList.add("focused");
+      searchBarRef.current.classList.add('focused');
     }
   };
 
   const handleBlur = () => {
     if (searchBarRef.current) {
-      searchBarRef.current.classList.remove("focused");
+      searchBarRef.current.classList.remove('focused');
     }
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(local);
+    setSearchTerm(local);
+  };
+
+  const handleInputChange = (e) => {
+    setLocal(e.target.value);
+    setSearchTerm(e.target.value);
   };
 
   const handleNavigateUser = () => {
     let logado = sessionStorage.getItem("user");
-    console.log(logado);
 
     if (!logado) {
       navigate("/login");
@@ -48,37 +52,26 @@ export default function Navbar() {
   };
 
   return (
-    <>
-      <nav>
-        <h1>Router Airplane</h1>
-
-        <div id="container-bar">
-          <div id="search-bar" ref={searchBarRef}>
-            <LiaSearchLocationSolid />
-            <form
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onSubmit={handleSearch}
-              action=""
-            >
-              <input
-                id="search-input"
-                type="text"
-                placeholder="Digite o local da viagem..."
-                autoComplete="off"
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                onChange={(e) => setLocal(e.target.value)}
-              />
-            </form>
-          </div>
+    <nav className='navbar'>
+      <h1 className='logo'>Router Airplane</h1>
+      <div className='searchContainer'>
+        <div className='searchBar' ref={searchBarRef}>
+          <LiaSearchLocationSolid className='searchIcon' />
+          <form className='searchForm' onSubmit={handleSearch}>
+            <input
+              className='searchInput'
+              type="text"
+              placeholder="Digite o local da viagem..."
+              autoComplete="off"
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onChange={handleInputChange}
+              value={local}
+            />
+          </form>
         </div>
-
-        <h3 onClick={handleNavigateUser}>{userLogado}</h3>
-      </nav>
-    </>
+      </div>
+      <h3 className='userGreeting' onClick={handleNavigateUser}>{userLogado}</h3>
+    </nav>
   );
 }

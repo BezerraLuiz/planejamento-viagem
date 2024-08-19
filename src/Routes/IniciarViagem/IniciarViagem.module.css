@@ -1,129 +1,147 @@
-#container_main {
+/* IniciarViagem.module.css */
+
+.container_main {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: 10px;
   min-height: 100vh;
+  padding: 20px;
   background-color: #f4f4f9;
 }
 
-#container {
-  border: 2.5px solid #5350c1;
-  border-radius: 10px;
-  padding: 40px;
-  background-color: white;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+.container {
   width: 100%;
+  max-width: 900px; /* Maior largura máxima para melhor visualização */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px; /* Maior padding para melhor espaçamento interno */
+  box-sizing: border-box;
 }
 
-#form {
+.form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+}
+
+.field_group {
+  margin-bottom: 20px; /* Espaço entre grupos de campos */
+}
+
+.input_group {
+  display: flex;
+  gap: 20px; /* Espaço entre colunas de campos */
+  flex-wrap: wrap; /* Permite que os campos se movam para a linha abaixo em telas pequenas */
 }
 
 .container_input {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Ajusta a largura para 100% */
+  flex: 1; /* Permite que os campos se ajustem ao espaço disponível */
+  margin-bottom: 20px;
 }
 
 .container_input label {
+  display: block;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: #5350c1;
 }
 
 .container_input input {
   width: 100%;
-  height: 40px;
-  border: 1.5px solid #5350c1;
-  background-color: white;
-  border-radius: 7px;
-  padding: 0 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fafafa;
+  color: #333;
   font-size: 16px;
 }
 
 .container_input input:disabled {
   background-color: #e0e0e0;
+  color: #666;
 }
 
-#container_orcamento {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+.container_orcamento {
+  margin: 20px 0;
+  text-align: center;
 }
 
-#container_orcamento span {
-  width: 100%;
-  height: 1px;
-  background-color: gray;
-}
-
-#container_orcamento p {
-  font-size: 20px;
+.container_orcamento p {
+  font-size: 22px; /* Fonte maior para destaque */
   font-weight: bold;
-  font-family: "Roboto", sans-serif;
   color: #5350c1;
+  margin: 10px 0;
 }
 
-/* Alinha os campos em duas colunas */
-.field-group {
+.divisor {
+  border-top: 2px solid #5350c1;
+  margin: 20px 0;
+}
+
+.container_btn {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 15px; /* Espaço entre botões */
+  flex-wrap: wrap; /* Permite que os botões se movam para a linha abaixo em telas pequenas */
 }
 
-.field-group .container_input {
-  flex: 1; /* Faz com que cada campo ocupe o mesmo espaço */
-}
-
-#container_btn {
-  display: flex;
-  justify-content: flex-end;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-#container_btn span,
-#container_btn button {
-  width: 150px;
-  height: 40px;
-  border-radius: 7px;
-  font-size: 16px;
+.container_btn span,
+.container_btn button {
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#container_btn span {
-  border: 3px solid #5350c1;
+  font-size: 16px;
   color: #5350c1;
-  background-color: transparent;
+  border: 2px solid #5350c1;
+  border-radius: 4px;
+  padding: 12px 20px;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
 }
 
-#container_btn span:hover {
-  background-color: #d5d5e9;
-}
-
-#container_btn button {
-  border: none;
+.container_btn span:hover,
+.container_btn button:hover {
   background-color: #5350c1;
-  color: white;
+  color: #fff;
 }
 
-#container_btn button:hover {
-  background-color: #3f3c9e;
+.container_btn button {
+  background-color: #5350c1;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
-#divisor {
-  width: 100%;
-  height: 1px;
-  background-color: gray;
-  margin: 30px 0;
+.container_btn button:active {
+  background-color: #4343a1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .input_group {
+    flex-direction: column;
+  }
+
+  .container_btn {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container_btn span,
+  .container_btn button {
+    font-size: 14px;
+    padding: 10px 15px;
+    width: 100%; /* Ocupa a largura total em telas pequenas */
+  }
+
+  .container_input {
+    margin-bottom: 20px; /* Espaçamento aumentado para melhor visualização */
+  }
+
+  .container_input label {
+    margin-bottom: 12px; /* Margem inferior maior */
+  }
 }

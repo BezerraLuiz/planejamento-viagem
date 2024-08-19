@@ -1,0 +1,146 @@
+/* DetalhesViagem.module.css */
+
+.container_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f4f4f9;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row; /* Mantenha a disposição horizontal para telas grandes */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.mapContainer {
+  flex: 1;
+  height: 400px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+#form {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.field_group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.container_input {
+  flex: 1;
+  min-width: 300px;
+}
+
+.container_input label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #5350c1;
+}
+
+.container_input input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fafafa;
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.container_input input:disabled {
+  background-color: #e0e0e0;
+  color: #666;
+}
+
+.container_orcamento {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.container_orcamento p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #5350c1;
+}
+
+.divisor {
+  border-top: 2px solid #5350c1;
+  margin: 20px 0;
+}
+
+.container_btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.container_btn span {
+  cursor: pointer;
+  font-size: 16px;
+  color: #5350c1;
+  border: 2px solid #5350c1;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container_btn span:hover {
+  background-color: #5350c1;
+  color: #fff;
+}
+
+.container_btn span:active {
+  background-color: #4343a1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Muda a disposição para coluna em telas menores */
+    padding: 10px;
+  }
+
+  .mapContainer {
+    height: 300px; /* Ajusta a altura do mapa para telas menores */
+    margin-right: 0; /* Remove a margem direita */
+    margin-bottom: 20px; /* Adiciona margem inferior */
+  }
+
+  #form {
+    flex: 1;
+  }
+
+  .field_group {
+    flex-direction: column; /* Muda a direção para coluna */
+    gap: 16px;
+  }
+
+  .container_input {
+    min-width: 100%; /* Garante largura total em telas pequenas */
+  }
+
+  .container_btn {
+    justify-content: center; /* Centraliza os botões em telas menores */
+  }
+
+  .container_btn span {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

@@ -1,8 +1,8 @@
-import style from "../RegisterPage/RegisterPage.module.css";
-import Footer from "../../Components/Outlet/Footer/Footer"
+import style from "./RegisterPage.module.css";
+import Footer from "../../Components/Outlet/Footer/Footer";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Loading from '../../Components/Loading/Loading'
+import Loading from '../../Components/Loading/Loading';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -18,23 +18,22 @@ export default function RegisterPage() {
       setIsLoading(true);
       
       try {
-        // Enviar dados para o backend.
         const response = await fetch('http://localhost:8080/api/users/register', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email,
-            senha: senha,
+            email,
+            senha,
           }),
         });
 
         if (response.ok) {
-          console.log("Usuario registrado com sucesso!");
+          console.log("Usuário registrado com sucesso!");
           navigate("/login");
         } else {
-          console.error("Erro ao registro do usuário | Erro no response.");
+          console.error("Erro ao registrar o usuário | Erro no response.");
           alert("Erro ao registrar o usuário!");
         }
       } catch (error) {
@@ -59,16 +58,18 @@ export default function RegisterPage() {
             <div className={style.titulo}>
               <h1>Cadastro</h1>
             </div>
-            <form onSubmit={handleSubmitAccount} className={style.form} action="">
+            <form onSubmit={handleSubmitAccount} className={style.form}>
               <div className={style.container_input}>
                 <label htmlFor="email">E-mail</label>
                 <input
                   className={style.input}
                   type="email"
+                  id="email"
                   placeholder="@mail.com"
                   required
                   autoComplete="off"
                   onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
               </div>
               <div className={style.container_input}>
@@ -76,6 +77,7 @@ export default function RegisterPage() {
                 <input
                   className={style.input}
                   type="password"
+                  id="password"
                   placeholder="Senha@123"
                   required
                   autoComplete="off"
@@ -84,24 +86,24 @@ export default function RegisterPage() {
                 />
               </div>
               <div className={style.container_input}>
-                <label htmlFor="password">Repetir Senha</label>
+                <label htmlFor="repeatPassword">Repetir Senha</label>
                 <input
                   className={style.input}
                   type="password"
+                  id="repeatPassword"
                   required
                   autoComplete="off"
                   onChange={(e) => setRepetirSenha(e.target.value)}
                   value={repetirSenha}
                 />
               </div>
-              <button id={style.button}>Cadastrar</button>
+              <button id={style.button} type="submit">Cadastrar</button>
               <div className={style.logar}>
                 <label htmlFor="registrar">Já possui cadastro?</label>
                 <Link to={`/login`}>Fazer login!</Link>
               </div>
             </form>
           </div>
-
           <Footer />
         </div>
       </div>

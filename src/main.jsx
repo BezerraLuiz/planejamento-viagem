@@ -7,6 +7,7 @@ import LoginPage from "./Routes/LoginPage/LoginPage.jsx";
 import RegisterPage from "./Routes/RegisterPage/RegisterPage.jsx";
 import IniciarViagem from "./Routes/IniciarViagem/IniciarViagem.jsx";
 import UserPage from "./Routes/UserPage/UserPage.jsx";
+import DetalhesViagem from "./Routes/DetalhesViagem/DetalhesViagem.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/iniciar-viagem",
     element: <IniciarViagem />,
+  },
+  {
+    path: "/detalhes/:idViagem", // Defina a rota para detalhes da viagem
+    element: <DetalhesViagem />,
   },
 ]);
 

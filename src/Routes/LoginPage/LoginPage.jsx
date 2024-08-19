@@ -1,4 +1,4 @@
-import style from "../LoginPage/LoginPage.module.css";
+import style from "./LoginPage.module.css";
 import Footer from "../../Components/Outlet/Footer/Footer";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.clear("lembrarUsuario");
+    localStorage.removeItem("lembrarUsuario");
   }, []);
 
   const handleSubmitAccount = async (e) => {
@@ -51,73 +51,61 @@ export default function LoginPage() {
     if (checkbox.checked) {
       localStorage.setItem("lembrarUsuario", email);
     } else {
-      localStorage.clear("lembrarUsuario");
+      localStorage.removeItem("lembrarUsuario");
     }
   };
 
   return (
     <>
       {isLoading && <Loading />}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          minHeight: "88vh",
-          gap: "80px",
-        }}
-      >
+      <div className={style.container}>
         <h1 id={style.nome}>Router Airplane</h1>
-        <div className={style.container}>
-          <div className={style.login}>
-            <div className={style.titulo}>
-              <h1>Login</h1>
-            </div>
-            <form
-              onSubmit={handleSubmitAccount}
-              className={style.form}
-              action=""
-            >
-              <div className={style.container_input}>
-                <label htmlFor="email">E-mail</label>
-                <input
-                  className={style.input}
-                  type="email"
-                  placeholder="@mail.com"
-                  required
-                  autoComplete="off"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className={style.container_input}>
-                <label htmlFor="password">Senha</label>
-                <input
-                  className={style.input}
-                  type="password"
-                  required
-                  autoComplete="off"
-                  onChange={(e) => setSenha(e.target.value)}
-                />
-              </div>
-              <div className={style.container_check}>
-                <input
-                  type="checkbox"
-                  id="check"
-                  onChange={handleRememberAccount}
-                />
-                <label htmlFor="check">Lembrar Usuário</label>
-              </div>
-              <button id={style.button}>Entrar</button>
-              <div className={style.register}>
-                <label htmlFor="registrar">Não possui cadastro?</label>
-                <Link to={`/registrar`}>Cadastrar-se.</Link>
-              </div>
-            </form>
+        <div className={style.login}>
+          <div className={style.titulo}>
+            <h1>Login</h1>
           </div>
-
-          <Footer />
+          <form onSubmit={handleSubmitAccount} className={style.form}>
+            <div className={style.container_input}>
+              <label htmlFor="email">E-mail</label>
+              <input
+                className={style.input}
+                type="email"
+                id="email"
+                placeholder="@mail.com"
+                required
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+            </div>
+            <div className={style.container_input}>
+              <label htmlFor="password">Senha</label>
+              <input
+                className={style.input}
+                type="password"
+                id="password"
+                required
+                autoComplete="off"
+                onChange={(e) => setSenha(e.target.value)}
+                value={senha}
+              />
+            </div>
+            <div className={style.container_check}>
+              <input
+                type="checkbox"
+                id="check"
+                onChange={handleRememberAccount}
+              />
+              <label htmlFor="check">Lembrar Usuário</label>
+            </div>
+            <button id={style.button} type="submit">Entrar</button>
+            <div className={style.register}>
+              <label htmlFor="registrar">Não possui cadastro?</label>
+              <Link to={`/registrar`}>Cadastrar-se.</Link>
+            </div>
+          </form>
         </div>
+        <Footer />
       </div>
     </>
   );

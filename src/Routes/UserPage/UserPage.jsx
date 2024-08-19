@@ -23,6 +23,7 @@ export default function UserPage() {
 
         if (response.ok) {
           const data = await response.json();
+          console.log(data)
           setSenha(data); // Assumindo que o backend retorna a senha
         } else {
           const errorText = await response.text();
@@ -77,9 +78,9 @@ export default function UserPage() {
     input.style.backgroundColor = "white";
   };
 
- const handleCancel = () => {
-  navigate('/');
- }
+  const handleCancel = () => {
+    navigate('/');
+  };
 
   const handleLogout = () => {
     setIsLoading(true);
@@ -95,8 +96,8 @@ export default function UserPage() {
   return (
     <>
       {isLoading && <Loading />}
-      <div id={style.container}>
-        <div id={style.container_user}>
+      <div className={style.container}>
+        <div className={style.container_user}>
           <div className={style.container_input}>
             <label htmlFor="email">E-mail</label>
             <input
@@ -108,7 +109,7 @@ export default function UserPage() {
           </div>
           <div className={style.container_input}>
             <label htmlFor="password">Senha</label>
-            <div id={style.container_senha}>
+            <div className={style.container_senha}>
               <input
                 type="password"
                 id="input-senha"
@@ -117,16 +118,12 @@ export default function UserPage() {
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
               />
-              <FaRegEdit id={style.icon_edit} onClick={handleEdit} />
+              <FaRegEdit className={style.icon_edit} onClick={handleEdit} />
             </div>
-            <div>
-              <p onClick={handleLogout}>Desconectar Usuário</p>
-            </div>
+            <p onClick={handleLogout} id={style.btn_desconect}>Desconectar Usuário</p>
           </div>
-          <div id={style.container_btn}>
-            <span onClick={handleCancel}>
-              Cancelar
-            </span>
+          <div className={style.container_btn}>
+            <span onClick={handleCancel}>Cancelar</span>
             <button onClick={handleSaveChanges}>Salvar Alterações</button>
           </div>
         </div>

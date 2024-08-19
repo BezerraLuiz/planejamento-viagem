@@ -1,5 +1,4 @@
 import style from "./IniciarViagem.module.css";
-import Footer from "../../Components/Outlet/Footer/Footer";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading/Loading";
@@ -23,7 +22,7 @@ export default function IniciarViagem() {
         const response = await fetch(
           "http://localhost:8080/api/users/getUserId",
           {
-            method: "POST", // Alterado para POST
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
@@ -33,14 +32,12 @@ export default function IniciarViagem() {
 
         if (response.ok) {
           const data = await response.json();
-          setIdUser(data); // Assumindo que o backend retorna a senha
-          console.log("Id: " + data);
+          setIdUser(data);
         } else {
           const errorText = await response.text();
           alert(errorText);
         }
       } catch (error) {
-        console.log("Erro no try: " + error);
         alert("Erro ao carregar id do usuário. Tente novamente mais tarde!");
       }
     };
@@ -51,23 +48,19 @@ export default function IniciarViagem() {
   const handleSubmitViagem = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-  
-    // Função para converter valores monetários para números
+
     const convertToNumber = (valor) => {
       return parseFloat(valor.replace("R$", "").replace(/\./g, "").replace(",", "."));
     };
-  
-    // Convertendo valores
+
     const valorPassagemNum = convertToNumber(valorPassagem);
     const valorHospedagemNum = convertToNumber(valorHospedagem);
     const valorConsumoNum = convertToNumber(valorConsumo);
-  
-    // Calculando o valor total
+
     const valorTotalCalculado = valorPassagemNum + valorHospedagemNum + valorConsumoNum;
     setValorTotal('R$ ' + valorTotalCalculado);
-  
+
     try {
-      // Enviar dados para o backend.
       const response = await fetch("http://localhost:8080/api/viagens/iniciar", {
         method: "POST",
         headers: {
@@ -85,34 +78,26 @@ export default function IniciarViagem() {
           valorTotal: valorTotalCalculado,
         }),
       });
-  
+
       if (response.ok) {
-        console.log("Viagem iniciada com sucesso!");
         navigate("/");
       } else {
-        console.error("Erro ao iniciar viagem | Erro no response.");
         alert("Erro ao iniciar viagem!");
       }
     } catch (error) {
-      console.log("Erro ao iniciar viagem | Erro no try: " + error);
       alert("Erro ao iniciar viagem");
     } finally {
       setIsLoading(false);
     }
-  };  
+  };
 
   const handleFormatarMoeda = (e, setState) => {
     let value = e.target.value;
-
-    // Remove todos os caracteres que não sejam dígitos
     value = value.replace(/\D/g, "");
-
-    // Formata o valor para moeda BR.
     value = (Number(value) / 100).toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     });
-
     setState(value);
   };
 
@@ -123,17 +108,11 @@ export default function IniciarViagem() {
   return (
     <>
       {isLoading && <Loading />}
-      <div id={style.container_main}>
-        <div id={style.container}>
-          <form id={style.form} action="" onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "100px",
-                  marginBottom: "15px",
-                }}
-              >
+      <div className={style.container_main}>
+        <div className={style.container}>
+          <form className={style.form} onSubmit={handleSubmitViagem}>
+            <div className={style.field_group}>
+              <div className={style.input_group}>
                 <div className={style.container_input}>
                   <label htmlFor="localViagem">Local da Viagem</label>
                   <input
@@ -157,13 +136,7 @@ export default function IniciarViagem() {
                   />
                 </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "100px",
-                }}
-              >
+              <div className={style.input_group}>
                 <div className={style.container_input}>
                   <label htmlFor="dataInicio">Data Início</label>
                   <input
@@ -189,90 +162,75 @@ export default function IniciarViagem() {
               </div>
             </div>
 
-            <div id={style.container_orcamento}>
+            <div className={style.container_orcamento}>
               <span></span>
               <p>Orçamento</p>
               <span></span>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "100px",
-                margin: "20px 0 15px 0",
-              }}
-            >
-              <div className={style.container_input}>
-                <label htmlFor="valorPassagem">Valor Passagem</label>
-                <input
-                  id="valorPassagem"
-                  type="text"
-                  autoComplete="off"
-                  required
-                  value={valorPassagem}
-                  onChange={(e) => handleFormatarMoeda(e, setValorPassagem)}
-                />
+            <div className={style.field_group}>
+              <div className={style.input_group}>
+                <div className={style.container_input}>
+                  <label htmlFor="valorPassagem">Valor Passagem</label>
+                  <input
+                    id="valorPassagem"
+                    type="text"
+                    autoComplete="off"
+                    required
+                    value={valorPassagem}
+                    onChange={(e) => handleFormatarMoeda(e, setValorPassagem)}
+                  />
+                </div>
+                <div className={style.container_input}>
+                  <label htmlFor="valorHospedagem">Valor Hospedagem</label>
+                  <input
+                    id="valorHospedagem"
+                    type="text"
+                    autoComplete="off"
+                    required
+                    value={valorHospedagem}
+                    onChange={(e) => handleFormatarMoeda(e, setValorHospedagem)}
+                  />
+                </div>
               </div>
-              <div className={style.container_input}>
-                <label htmlFor="valorHospedagem">Valor Hospedagem</label>
-                <input
-                  id="valorHospedagem"
-                  type="text"
-                  autoComplete="off"
-                  required
-                  value={valorHospedagem}
-                  onChange={(e) => handleFormatarMoeda(e, setValorHospedagem)}
-                />
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "100px",
-              }}
-            >
-              <div className={style.container_input}>
-                <label htmlFor="valorConsumo">
-                  Valor estipulado para consumo
-                </label>
-                <input
-                  id="valorConsumo"
-                  type="text"
-                  autoComplete="off"
-                  required
-                  value={valorConsumo}
-                  onChange={(e) => handleFormatarMoeda(e, setValorConsumo)}
-                />
-              </div>
-              <div className={style.container_input}>
-                <label htmlFor="valorTotal">Total</label>
-                <input
-                  id="valorTotal"
-                  type="text"
-                  autoComplete="off"
-                  required
-                  disabled
-                  value={valorTotal}
-                  onChange={(e) => handleFormatarMoeda(e, setValorTotal)}
-                />
+              <div className={style.input_group}>
+                <div className={style.container_input}>
+                  <label htmlFor="valorConsumo">Valor estipulado para consumo</label>
+                  <input
+                    id="valorConsumo"
+                    type="text"
+                    autoComplete="off"
+                    required
+                    value={valorConsumo}
+                    onChange={(e) => handleFormatarMoeda(e, setValorConsumo)}
+                  />
+                </div>
+                <div className={style.container_input}>
+                  <label htmlFor="valorTotal">Total</label>
+                  <input
+                    id="valorTotal"
+                    type="text"
+                    autoComplete="off"
+                    required
+                    disabled
+                    value={valorTotal}
+                    onChange={(e) => handleFormatarMoeda(e, setValorTotal)}
+                  />
+                </div>
               </div>
             </div>
 
-            <div id={style.divisor}>
+            <div className={style.divisor}>
               <span></span>
             </div>
 
-            <div id={style.container_btn}>
+            <div className={style.container_btn}>
               <span onClick={handleCancel}>Cancelar</span>
-              <button onClick={handleSubmitViagem}>Salvar Alterações</button>
+              <button type="submit">Salvar Alterações</button>
             </div>
           </form>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

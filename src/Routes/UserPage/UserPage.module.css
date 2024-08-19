@@ -1,74 +1,68 @@
-#container {
+/* UserPage.module.css */
+
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  padding: 0 20px; /* Adicionando padding para não colar nas bordas */
 }
 
-#container_user {
-  width: 900px;
-  height: 500px;
+.container_user {
+  width: 100%;
+  max-width: 900px;
   border: 8px solid #5350C1;
   border-radius: 10px;
+  padding: 20px; /* Adicionando padding interno */
+  box-sizing: border-box;
+  background-color: white; /* Garantir que o fundo seja branco */
 }
 
 .container_input {
   display: flex;
   flex-direction: column;
-  margin: 10px;
-
-  & label {
-    font-size: 18px;
-    align-self: flex-start;
-    font-family: 'Roboto', sans-serif;
-  }
-
-  & input {
-    width: 500px;
-    height: 35px;
-    border: 2px solid black;
-    background-color: #d5d5e9;
-    border-radius: 7px;
-    margin: 5.5px 0;
-    padding: 7px;
-    transition: ease-in-out 0.3s;
-  }
-
-  & p {
-    text-decoration: underline;
-    color: black;
-    margin-top: 5px;
-    cursor: pointer;
-    max-width: 159px;
-  }
-
-  & p:hover {
-    color: blue;
-  }
+  margin: 15px 0; /* Ajustando a margem vertical */
 }
 
-#container_senha {
+.container_input label {
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 5px; /* Adicionando margem inferior */
+}
+
+.container_input input {
+  width: 100%;
+  max-width: 500px;
+  height: 35px;
+  border: 2px solid #5350C1;
+  background-color: #d5d5e9;
+  border-radius: 7px;
+  margin-bottom: 10px; /* Adicionando margem inferior */
+  padding: 7px;
+  transition: background-color 0.3s ease;
+}
+
+.container_senha {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px; /* Ajustando o espaçamento entre o input e o ícone */
 }
 
-#icon_edit {
-  font-size: 35px;
+.icon_edit {
+  font-size: 24px; /* Ajustando o tamanho do ícone */
   cursor: pointer;
 }
 
-#container_btn {
+.container_btn {
   display: flex;
   justify-content: flex-end;
-  align-items: end;
-  margin: 30px 10px;
+  align-items: center;
+  margin-top: 20px;
   gap: 20px;
-  min-height: 55%;
 }
 
-#container_btn span,
-#container_btn button {
+.container_btn span,
+.container_btn button {
   width: 150px;
   height: 40px;
   border-radius: 7px;
@@ -80,22 +74,49 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#container_btn span {
+.container_btn span {
   border: 3px solid #5350c1;
   color: #5350c1;
   background-color: transparent;
 }
 
-#container_btn span:hover {
+.container_btn span:hover {
   background-color: #d5d5e9;
 }
 
-#container_btn button {
+.container_btn button {
   border: none;
   background-color: #5350c1;
   color: white;
 }
 
-#container_btn button:hover {
+.container_btn button:hover {
   background-color: #3f3c9e;
+}
+
+#btn_desconect {
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+#btn_desconect:hover {
+  color: blue;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container_user {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .container_input input {
+    width: 100%;
+  }
+
+  .icon_edit {
+    font-size: 20px; /* Ajustando o tamanho do ícone em telas menores */
+  }
 }
