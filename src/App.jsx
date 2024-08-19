@@ -53,35 +53,33 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (sessionStorage.length != 0) {
-      if (idUser) {
-        const fetchViagemData = async () => {
-          try {
-            const response = await fetch(
-              "http://localhost:8080/api/viagens/get-viagens",
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                  "User-Id": idUser,
-                },
-              }
-            );
-
-            if (response.ok) {
-              const data = await response.json();
-              setViagens(data);
-            } else {
-              const errorText = await response.text();
-              alert(errorText);
+    if (idUser) {
+      const fetchViagemData = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:8080/api/viagens/get-viagens",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                "User-Id": idUser,
+              },
             }
-          } catch (error) {
-            console.log("Erro ao carregar as viagens.");
-          }
-        };
+          );
 
-        fetchViagemData();
-      }
+          if (response.ok) {
+            const data = await response.json();
+            setViagens(data);
+          } else {
+            const errorText = await response.text();
+            alert(errorText);
+          }
+        } catch (error) {
+          console.log("Erro ao carregar as viagens.");
+        }
+      };
+
+      fetchViagemData();
     }
   }, [idUser]);
 
@@ -140,16 +138,31 @@ function App() {
 
       <div className={style.container}>
         {filteredViagens.map((viagem) => (
-          <div
-            key={viagem.idViagem}
-            className={style.card}
-          >
-            <h2 className={style.title} onClick={() => detalhesViagem(viagem.idViagem)}>{viagem.localViagem}</h2>
-            <p className={style.details} onClick={() => detalhesViagem(viagem.idViagem)}>
+          <div key={viagem.idViagem} className={style.card}>
+            <h2
+              className={style.title}
+              onClick={() => detalhesViagem(viagem.idViagem)}
+            >
+              {viagem.localViagem}
+            </h2>
+            <p
+              className={style.details}
+              onClick={() => detalhesViagem(viagem.idViagem)}
+            >
               <span className={style.label}>Código:</span> {viagem.idViagem}
             </p>
-            <p className={style.details} onClick={() => detalhesViagem(viagem.idViagem)}>Data de Início: {viagem.dataInicio}</p>
-            <p className={style.details} onClick={() => detalhesViagem(viagem.idViagem)}>Data de Fim: {viagem.dataFim}</p>
+            <p
+              className={style.details}
+              onClick={() => detalhesViagem(viagem.idViagem)}
+            >
+              Data de Início: {viagem.dataInicio}
+            </p>
+            <p
+              className={style.details}
+              onClick={() => detalhesViagem(viagem.idViagem)}
+            >
+              Data de Fim: {viagem.dataFim}
+            </p>
             <button
               className={style.finalizarButton}
               onClick={() => handleFinalizar(viagem.idViagem)}
